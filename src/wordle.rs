@@ -14,7 +14,7 @@ lazy_static! {
         (MatchOption::WrongLetter, "⬜".to_string())
     ].into_iter().collect();
 
-    static ref ALL_WORDS: Vec<String> = BufReader::new(
+    pub static ref ALL_WORDS: Vec<String> = BufReader::new(
         File::open(
             "src/data/five_letter_scrabble.txt"
         ).unwrap()
@@ -80,6 +80,26 @@ impl Guess {
                 }
             )
         }
+    }
+
+    pub fn update_with_feedback(&mut self, s: String) -> Result<(), BadInput> {
+        println!("LEN {}", s.len());
+        if s.len() != 5 {
+            return Err(BadInput)
+        }
+
+        let mut feedback: Vec<MatchOption> = vec![];
+        for c in s.chars() {
+            match c {
+                '*' => feedback.push(MatchOption::Correct),
+                '~' => feedback.push(MatchOption::WrongPlace),
+                'x' => feedback.push(MatchOption::WrongLetter),
+                _ => return Err(BadInput)
+            }
+        }
+
+        self.feedback = Some(Feedback::from_vec(feedback)?);
+        Ok(())
     }
 }
 
