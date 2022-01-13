@@ -1,10 +1,9 @@
 use std::collections::{HashMap, HashSet};
 use std::{fmt, convert::TryInto};
 use std::fs::File;
-use std::io::{BufRead, BufReader, Lines};
+use std::io::{BufRead, BufReader};
 
 use lazy_static::lazy_static;
-use regex::Regex;
 
 
 lazy_static! {
