@@ -11,7 +11,7 @@ fn main() -> Result<(), BadInput> {
 
     loop {
         let mut guess_string = String::new();
-        println!("What word do you guess?");
+        println!("\nWhat word do you guess?");
         io::stdin().read_line(&mut guess_string).expect("Failed to read line from stdin");
         clean_input_string(&mut guess_string);
         let mut guess = Guess::from_string(guess_string)?;
