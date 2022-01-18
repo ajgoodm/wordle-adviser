@@ -82,7 +82,6 @@ impl Guess {
     }
 
     pub fn update_with_feedback(&mut self, s: String) -> Result<(), BadInput> {
-        println!("LEN {}", s.len());
         if s.len() != 5 {
             return Err(BadInput)
         }
